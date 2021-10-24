@@ -1,7 +1,7 @@
 package com.example.Bookstore.web;
 
 import com.example.Bookstore.domain.SignupForm;
-import com.example.Bookstore.domain.User;
+import com.example.Bookstore.domain.UserTable;
 import com.example.Bookstore.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,12 +41,12 @@ public class UserController {
 		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		    	String hashPwd = bc.encode(pwd);
 	
-		    	User newUser = new User();
-		    	newUser.setPasswordHash(hashPwd);
-		    	newUser.setUsername(signupForm.getUsername());
-		    	newUser.setRole("USER");
+		    	UserTable newUserTable = new UserTable();
+		    	newUserTable.setPasswordHash(hashPwd);
+		    	newUserTable.setUsername(signupForm.getUsername());
+		    	newUserTable.setRole("USER");
 		    	if (repository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
-		    		repository.save(newUser);
+		    		repository.save(newUserTable);
 		    	}
 		    	else {
 	    			bindingResult.rejectValue("username", "err.username", "Username already exists");    	

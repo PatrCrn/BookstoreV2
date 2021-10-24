@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.Bookstore.domain.UserRepository;
-import com.example.Bookstore.domain.User;
+import com.example.Bookstore.domain.UserTable;
 
 /**
  * This class is used by spring security to authenticate and authorize user
@@ -25,7 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService  {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {   
-    	User curruser = repository.findByUsername(username);
+    	UserTable curruser = repository.findByUsername(username);
         UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPasswordHash(), 
         		AuthorityUtils.createAuthorityList(curruser.getRole()));
         return user;
